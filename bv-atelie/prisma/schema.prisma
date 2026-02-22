@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Employee {
+  id          String             @id @default(cuid())
+  name        String
+  phone       String?
+  paymentType String             // "DAILY" | "PRODUCTION"
+  dailyRate   Float?
+  active      Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  attendances Attendance[]
+  productions ProductionRecord[]
+  payments    Payment[]
+}
+
+model ServiceType {
+  id           String             @id @default(cuid())
+  name         String
+  pricePerUnit Float
+  active       Boolean            @default(true)
+  createdAt    DateTime           @default(now())
+  productions  ProductionRecord[]
+}
+
+model Attendance {
+  id         String   @id @default(cuid())
+  employee   Employee @relation(fields: [employeeId], references: [id])
+  employeeId String
+  date       DateTime
+  status     String   // "PRESENT" | "ABSENT" | "HALF_DAY"
+  note       String?
+  createdAt  DateTime @default(now())
+
+  @@unique([employeeId, date])
+}
+
+model ProductionRecord {
+  id            String      @id @default(cuid())
+  employee      Employee    @relation(fields: [employeeId], references: [id])
+  employeeId    String
+  serviceType   ServiceType @relation(fields: [serviceTypeId], references: [id])
+  serviceTypeId String
+  date          DateTime
+  quantity      Int
+  unitPrice     Float
+  note          String?
+  createdAt     DateTime    @default(now())
+}
+
+model Payment {
+  id          String    @id @default(cuid())
+  employee    Employee  @relation(fields: [employeeId], references: [id])
+  employeeId  String
+  startDate   DateTime
+  endDate     DateTime
+  totalAmount Float
+  status      String    @default("PENDING") // "PENDING" | "PAID"
+  note        String?
+  paidAt      DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
