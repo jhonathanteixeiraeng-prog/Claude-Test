@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { signOut } from "next-auth/react"
@@ -18,10 +19,14 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 min-h-screen flex flex-col">
-      <div className="p-6 border-b border-gray-200">
-        <div className="text-2xl mb-1">🧵</div>
-        <h1 className="font-bold text-gray-800 leading-tight">BV Atelie</h1>
-        <p className="text-xs text-gray-500">e Bordados</p>
+      <div className="p-4 border-b border-gray-200 flex justify-center">
+        <Image
+          src="/logo.svg"
+          alt="BV Ateliê e Bordados"
+          width={120}
+          height={120}
+          priority
+        />
       </div>
 
       <nav className="flex-1 p-4 space-y-1">

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <g id="daisy">
+      <!-- 8 petals radiating from center -->
+      <ellipse cx="0" cy="-6" rx="2.2" ry="4.2" fill="#c8a85a"/>
+      <ellipse cx="0" cy="-6" rx="2.2" ry="4.2" fill="#c8a85a" transform="rotate(45)"/>
+      <ellipse cx="0" cy="-6" rx="2.2" ry="4.2" fill="#c8a85a" transform="rotate(90)"/>
+      <ellipse cx="0" cy="-6" rx="2.2" ry="4.2" fill="#c8a85a" transform="rotate(135)"/>
+      <ellipse cx="0" cy="-6" rx="2.2" ry="4.2" fill="#c8a85a" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-6" rx="2.2" ry="4.2" fill="#c8a85a" transform="rotate(225)"/>
+      <ellipse cx="0" cy="-6" rx="2.2" ry="4.2" fill="#c8a85a" transform="rotate(270)"/>
+      <ellipse cx="0" cy="-6" rx="2.2" ry="4.2" fill="#c8a85a" transform="rotate(315)"/>
+      <!-- Center dot -->
+      <circle cx="0" cy="0" r="2.8" fill="#c8a85a"/>
+    </g>
+  </defs>
+
+  <!-- Cream linen background -->
+  <rect width="500" height="500" fill="#e8e3d4"/>
+
+  <!-- 32 daisy flowers arranged in ring at radius 185 from center (250,250) -->
+  <use href="#daisy" transform="translate(250,250) rotate(0) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(11.25) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(22.5) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(33.75) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(45) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(56.25) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(67.5) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(78.75) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(90) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(101.25) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(112.5) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(123.75) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(135) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(146.25) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(157.5) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(168.75) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(180) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(191.25) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(202.5) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(213.75) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(225) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(236.25) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(247.5) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(258.75) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(270) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(281.25) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(292.5) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(303.75) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(315) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(326.25) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(337.5) translate(0,-185)"/>
+  <use href="#daisy" transform="translate(250,250) rotate(348.75) translate(0,-185)"/>
+
+  <!-- Gold outer border rings -->
+  <circle cx="250" cy="250" r="168" fill="none" stroke="#c8a85a" stroke-width="1.8"/>
+  <circle cx="250" cy="250" r="164" fill="none" stroke="#c8a85a" stroke-width="0.8"/>
+
+  <!-- Main teal circle -->
+  <circle cx="250" cy="250" r="160" fill="#1d6b5d"/>
+
+  <!-- Inner gold border ring -->
+  <circle cx="250" cy="250" r="160" fill="none" stroke="#c8a85a" stroke-width="1.8"/>
+  <circle cx="250" cy="250" r="155" fill="none" stroke="#c8a85a" stroke-width="0.6"/>
+
+  <!-- BV italic script text -->
+  <text
+    x="246"
+    y="255"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="108"
+    font-style="italic"
+    fill="white"
+    text-anchor="middle">BV</text>
+
+  <!-- Needle integrated with V (diagonal line with eye at top) -->
+  <g stroke="white" fill="none" stroke-linecap="round">
+    <!-- Needle shaft -->
+    <line x1="306" y1="163" x2="322" y2="248" stroke-width="1.8"/>
+    <!-- Needle tip (tapered) -->
+    <line x1="322" y1="248" x2="325" y2="258" stroke-width="1.0"/>
+    <!-- Needle eye (small oval at top) -->
+    <ellipse cx="304" cy="165" rx="3.5" ry="6.5" stroke-width="1.5"
+      transform="rotate(-20, 304, 165)"/>
+  </g>
+
+  <!-- Gold separator lines flanking text below BV -->
+  <line x1="148" y1="277" x2="205" y2="277" stroke="#c8a85a" stroke-width="1.2"/>
+  <line x1="293" y1="277" x2="352" y2="277" stroke="#c8a85a" stroke-width="1.2"/>
+
+  <!-- ATELIÊ E BORDADOS -->
+  <text
+    x="250"
+    y="298"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="14"
+    fill="white"
+    text-anchor="middle"
+    letter-spacing="2.8">ATELIÊ E BORDADOS</text>
+</svg>
