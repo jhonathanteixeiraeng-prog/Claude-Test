@@ -40,7 +40,7 @@ export default async function DashboardPage() {
   const todayStr = format(new Date(), "EEEE, d 'de' MMMM 'de' yyyy", { locale: ptBR })
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-4 md:p-6 max-w-6xl mx-auto">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
         <p className="text-gray-500 capitalize">{todayStr}</p>
@@ -50,22 +50,22 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
           <p className="text-sm text-gray-500">Funcionários Ativos</p>
-          <p className="text-3xl font-bold text-gray-800 mt-1">{totalEmployees}</p>
+          <p className="text-2xl md:text-3xl font-bold text-gray-800 mt-1">{totalEmployees}</p>
           <p className="text-xs text-gray-400 mt-1">total cadastrados</p>
         </div>
         <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
           <p className="text-sm text-gray-500">Presentes Hoje</p>
-          <p className="text-3xl font-bold text-green-600 mt-1">{presentToday}</p>
+          <p className="text-2xl md:text-3xl font-bold text-green-600 mt-1">{presentToday}</p>
           <p className="text-xs text-gray-400 mt-1">registros de presença</p>
         </div>
         <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
           <p className="text-sm text-gray-500">Ausentes Hoje</p>
-          <p className="text-3xl font-bold text-red-500 mt-1">{absentToday}</p>
+          <p className="text-2xl md:text-3xl font-bold text-red-500 mt-1">{absentToday}</p>
           <p className="text-xs text-gray-400 mt-1">registros de ausência</p>
         </div>
         <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
           <p className="text-sm text-gray-500">Pagamentos Pendentes</p>
-          <p className="text-3xl font-bold text-orange-500 mt-1">{formatCurrency(pendingTotal)}</p>
+          <p className="text-xl md:text-3xl font-bold text-orange-500 mt-1">{formatCurrency(pendingTotal)}</p>
           <p className="text-xs text-gray-400 mt-1">{pendingPayments.length} fechamento(s)</p>
         </div>
       </div>
