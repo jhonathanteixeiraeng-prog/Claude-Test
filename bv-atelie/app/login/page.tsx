@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
@@ -33,10 +34,14 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="text-4xl mb-2">🧵</div>
-          <h1 className="text-2xl font-bold text-gray-800">BV Atelie e Bordados</h1>
-          <p className="text-gray-500 text-sm mt-1">Sistema de Gerenciamento</p>
+        <div className="flex justify-center mb-8">
+          <Image
+            src="/logo.svg"
+            alt="BV Ateliê e Bordados"
+            width={160}
+            height={160}
+            priority
+          />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
