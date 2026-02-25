@@ -1,19 +1,18 @@
 import { prisma } from "@/lib/prisma"
 import AttendanceManager from "./AttendanceManager"
-import { format } from "date-fns"
 
 export default async function AttendancePage({
   searchParams,
 }: {
-  searchParams: Promise<{ date?: string }>
+  searchParams: Promise<{ month?: string; year?: string }>
 }) {
   const params = await searchParams
-  const dateStr = params.date || format(new Date(), "yyyy-MM-dd")
+  const now = new Date()
+  const month = params.month ? parseInt(params.month) : now.getMonth() + 1
+  const year  = params.year  ? parseInt(params.year)  : now.getFullYear()
 
-  const dateObj = new Date(dateStr)
-  dateObj.setUTCHours(0, 0, 0, 0)
-  const dateEnd = new Date(dateStr)
-  dateEnd.setUTCHours(23, 59, 59, 999)
+  const monthStart = new Date(Date.UTC(year, month - 1, 1,  0,  0,  0))
+  const monthEnd   = new Date(Date.UTC(year, month,     0, 23, 59, 59, 999))
 
   const [employees, attendances] = await Promise.all([
     prisma.employee.findMany({
@@ -21,23 +20,23 @@ export default async function AttendancePage({
       orderBy: { name: "asc" },
     }),
     prisma.attendance.findMany({
-      where: { date: { gte: dateObj, lte: dateEnd } },
+      where: { date: { gte: monthStart, lte: monthEnd } },
     }),
   ])
 
-  const attendanceMap = Object.fromEntries(attendances.map((a) => [a.employeeId, a]))
+  // { [employeeId]: { [day: number]: status } }
+  const attendanceMap: Record<string, Record<number, string>> = {}
+  for (const a of attendances) {
+    if (!attendanceMap[a.employeeId]) attendanceMap[a.employeeId] = {}
+    attendanceMap[a.employeeId][new Date(a.date).getUTCDate()] = a.status
+  }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Registro de Presença</h1>
-        <p className="text-gray-500 text-sm">Marque a presença dos funcionários por dia</p>
-      </div>
-      <AttendanceManager
-        employees={employees}
-        attendanceMap={attendanceMap}
-        selectedDate={dateStr}
-      />
-    </div>
+    <AttendanceManager
+      employees={employees}
+      attendanceMap={attendanceMap}
+      month={month}
+      year={year}
+    />
   )
 }

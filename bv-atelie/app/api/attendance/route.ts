@@ -28,6 +28,32 @@ export async function GET(request: Request) {
   return NextResponse.json(attendances)
 }
 
+export async function DELETE(request: Request) {
+  const session = await auth()
+  if (!session) return NextResponse.json({ error: "Não autorizado" }, { status: 401 })
+
+  const { searchParams } = new URL(request.url)
+  const employeeId = searchParams.get("employeeId")
+  const date = searchParams.get("date")
+
+  if (!employeeId || !date) {
+    return NextResponse.json({ error: "Parâmetros inválidos" }, { status: 400 })
+  }
+
+  const attendanceDate = new Date(date)
+  attendanceDate.setUTCHours(12, 0, 0, 0)
+
+  try {
+    await prisma.attendance.delete({
+      where: { employeeId_date: { employeeId, date: attendanceDate } },
+    })
+  } catch {
+    // Record may not exist — that's fine
+  }
+
+  return NextResponse.json({ ok: true })
+}
+
 export async function POST(request: Request) {
   const session = await auth()
   if (!session) return NextResponse.json({ error: "Não autorizado" }, { status: 401 })
