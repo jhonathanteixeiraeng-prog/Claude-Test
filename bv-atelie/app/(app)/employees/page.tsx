@@ -33,103 +33,49 @@ export default async function EmployeesPage() {
             <p>Nenhum funcionário cadastrado</p>
           </div>
         ) : (
-          <>
-            {/* Mobile: card list */}
-            <div className="divide-y divide-gray-50 sm:hidden">
-              {employees.map((emp) => (
-                <div
-                  key={emp.id}
-                  className={`px-4 py-3 flex items-center justify-between gap-3 ${!emp.active ? "opacity-50" : ""}`}
-                >
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <p className="font-medium text-gray-800 text-sm">{emp.name}</p>
-                      <span
-                        className={`text-xs px-2 py-0.5 rounded-full ${
-                          emp.active ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"
-                        }`}
-                      >
-                        {emp.active ? "Ativo" : "Inativo"}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 mt-1 flex-wrap">
-                      <span
-                        className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                          emp.paymentType === "DAILY"
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-purple-100 text-purple-700"
-                        }`}
-                      >
-                        {emp.paymentType === "DAILY" ? "Diária" : "Produção"}
-                      </span>
-                      <span className="text-xs text-gray-500">
-                        {emp.paymentType === "DAILY" && emp.dailyRate
-                          ? formatCurrency(emp.dailyRate) + "/dia"
-                          : emp.paymentType === "PRODUCTION"
-                          ? "por peça"
-                          : "-"}
-                      </span>
-                    </div>
-                    {emp.phone && <p className="text-xs text-gray-400 mt-0.5">{emp.phone}</p>}
+          <div className="divide-y divide-gray-100">
+            {employees.map((emp) => (
+              <div
+                key={emp.id}
+                className={`px-4 py-3 flex items-center justify-between gap-3 ${!emp.active ? "opacity-50" : ""}`}
+              >
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="font-medium text-gray-800 text-sm">{emp.name}</p>
+                    <span
+                      className={`text-xs px-2 py-0.5 rounded-full ${
+                        emp.active ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"
+                      }`}
+                    >
+                      {emp.active ? "Ativo" : "Inativo"}
+                    </span>
                   </div>
-                  <EmployeeActions employee={emp} />
-                </div>
-              ))}
-            </div>
-
-            {/* Desktop: table */}
-            <table className="w-full hidden sm:table">
-              <thead className="bg-gray-50 border-b border-gray-100">
-                <tr>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Nome</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Tipo</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Valor</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
-                  <th className="px-5 py-3"></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-50">
-                {employees.map((emp) => (
-                  <tr key={emp.id} className={`${!emp.active ? "opacity-50" : ""}`}>
-                    <td className="px-5 py-4">
-                      <p className="font-medium text-gray-800">{emp.name}</p>
-                      {emp.phone && <p className="text-xs text-gray-400">{emp.phone}</p>}
-                    </td>
-                    <td className="px-5 py-4">
-                      <span
-                        className={`text-xs px-2 py-1 rounded-full font-medium ${
-                          emp.paymentType === "DAILY"
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-purple-100 text-purple-700"
-                        }`}
-                      >
-                        {emp.paymentType === "DAILY" ? "Diária" : "Produção"}
-                      </span>
-                    </td>
-                    <td className="px-5 py-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-2 mt-1 flex-wrap">
+                    <span
+                      className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                        emp.paymentType === "DAILY"
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-purple-100 text-purple-700"
+                      }`}
+                    >
+                      {emp.paymentType === "DAILY" ? "Diária" : "Produção"}
+                    </span>
+                    <span className="text-xs text-gray-500">
                       {emp.paymentType === "DAILY" && emp.dailyRate
                         ? formatCurrency(emp.dailyRate) + "/dia"
                         : emp.paymentType === "PRODUCTION"
                         ? "por peça"
                         : "-"}
-                    </td>
-                    <td className="px-5 py-4">
-                      <span
-                        className={`text-xs px-2 py-1 rounded-full ${
-                          emp.active ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"
-                        }`}
-                      >
-                        {emp.active ? "Ativo" : "Inativo"}
-                      </span>
-                    </td>
-                    <td className="px-5 py-4 text-right">
-                      <EmployeeActions employee={emp} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
+                    </span>
+                    {emp.phone && (
+                      <span className="text-xs text-gray-400">{emp.phone}</span>
+                    )}
+                  </div>
+                </div>
+                <EmployeeActions employee={emp} />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
