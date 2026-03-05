@@ -6,16 +6,17 @@ import { getDaysInMonth, getDay } from "date-fns"
 
 type Employee = { id: string; name: string; paymentType: string; dailyRate: number | null }
 
-type StatusKey = "PRESENT" | "ABSENT" | "JUSTIFIED" | "VACATION"
+type StatusKey = "PRESENT" | "HALF_DAY" | "ABSENT" | "JUSTIFIED" | "VACATION"
 
 const STATUS_CONFIG: Record<StatusKey, { label: string; short: string; bg: string; text: string }> = {
-  PRESENT:   { label: "Presente",    short: "P",  bg: "#16a34a", text: "#fff" },
-  ABSENT:    { label: "Falta",       short: "F",  bg: "#dc2626", text: "#fff" },
-  JUSTIFIED: { label: "Justificada", short: "J",  bg: "#d97706", text: "#fff" },
-  VACATION:  { label: "Férias",      short: "Fé", bg: "#0891b2", text: "#fff" },
+  PRESENT:   { label: "Presente",      short: "P",  bg: "#16a34a", text: "#fff" },
+  HALF_DAY:  { label: "Meio período",  short: "½",  bg: "#7c3aed", text: "#fff" },
+  ABSENT:    { label: "Falta",         short: "F",  bg: "#dc2626", text: "#fff" },
+  JUSTIFIED: { label: "Justificada",   short: "J",  bg: "#d97706", text: "#fff" },
+  VACATION:  { label: "Férias",        short: "Fé", bg: "#0891b2", text: "#fff" },
 }
 
-const CYCLE: (StatusKey | null)[] = [null, "PRESENT", "ABSENT", "JUSTIFIED", "VACATION"]
+const CYCLE: (StatusKey | null)[] = [null, "PRESENT", "HALF_DAY", "ABSENT", "JUSTIFIED", "VACATION"]
 
 const AVATAR_COLORS = [
   "#6366f1", "#8b5cf6", "#ec4899", "#14b8a6",
@@ -61,7 +62,6 @@ export default function AttendanceManager({
   function getStatus(employeeId: string, day: number): StatusKey | null {
     const s = localMap[employeeId]?.[day]
     if (!s) return null
-    if (s === "HALF_DAY") return "JUSTIFIED"
     return s as StatusKey
   }
 
@@ -189,7 +189,8 @@ export default function AttendanceManager({
             <tbody>
               {employees.map((emp, idx) => {
                 const avatarColor = AVATAR_COLORS[idx % AVATAR_COLORS.length]
-                const present  = countStatus(emp.id, "PRESENT")
+                const present   = countStatus(emp.id, "PRESENT")
+                const halfDay  = countStatus(emp.id, "HALF_DAY")
                 const absent   = countStatus(emp.id, "ABSENT")
                 const justified = countStatus(emp.id, "JUSTIFIED")
 
@@ -262,6 +263,7 @@ export default function AttendanceManager({
                     <td className="text-center py-2 px-2">
                       <div className="text-xs leading-tight space-y-0.5">
                         <div className="text-green-400 font-medium">{present}P</div>
+                        {halfDay > 0 && <div className="text-purple-400">{halfDay}½</div>}
                         {absent > 0 && <div className="text-red-400">{absent}F</div>}
                         {justified > 0 && <div className="text-amber-400">{justified}J</div>}
                       </div>
