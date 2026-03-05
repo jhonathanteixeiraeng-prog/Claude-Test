@@ -208,9 +208,9 @@ export default function PaymentsManager({
 
       {/* Payments list */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="px-5 py-3 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
-          <h2 className="font-semibold text-gray-700 text-sm">Histórico de Pagamentos</h2>
-          <div className="flex gap-2">
+        <div className="px-4 py-3 border-b border-gray-100 bg-gray-50 flex flex-wrap items-center gap-2">
+          <h2 className="font-semibold text-gray-700 text-sm mr-auto">Histórico de Pagamentos</h2>
+          <div className="flex gap-2 flex-wrap">
             {["ALL", "PENDING", "PAID"].map((s) => (
               <button
                 key={s}
@@ -232,46 +232,46 @@ export default function PaymentsManager({
         ) : (
           <div className="divide-y divide-gray-50">
             {filteredPayments.map((p) => (
-              <div key={p.id} className="px-5 py-4 flex items-center justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <p className="font-medium text-sm text-gray-800">{p.employee.name}</p>
-                    <span
-                      className={`text-xs px-2 py-0.5 rounded-full ${
-                        p.status === "PAID"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-orange-100 text-orange-600"
-                      }`}
-                    >
-                      {p.status === "PAID" ? "Pago" : "Pendente"}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-500 mt-0.5">
-                    {formatDate(p.startDate)} – {formatDate(p.endDate)}
-                  </p>
-                  {p.note && <p className="text-xs text-gray-400">{p.note}</p>}
-                  {p.status === "PAID" && p.paidAt && (
-                    <p className="text-xs text-green-600">Pago em {formatDate(p.paidAt)}</p>
-                  )}
-                </div>
-                <div className="text-right flex flex-col items-end gap-2">
-                  <p className="font-bold text-gray-800 text-lg">{formatCurrency(p.totalAmount)}</p>
-                  <div className="flex gap-2">
-                    {p.status === "PENDING" && (
-                      <button
-                        onClick={() => handleMarkPaid(p.id)}
-                        className="text-xs bg-green-600 text-white px-3 py-1 rounded-lg hover:bg-green-700"
+              <div key={p.id} className="px-4 py-4 flex flex-col gap-2">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="font-medium text-sm text-gray-800">{p.employee.name}</p>
+                      <span
+                        className={`text-xs px-2 py-0.5 rounded-full ${
+                          p.status === "PAID"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-orange-100 text-orange-600"
+                        }`}
                       >
-                        Marcar como Pago
-                      </button>
+                        {p.status === "PAID" ? "Pago" : "Pendente"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      {formatDate(p.startDate)} – {formatDate(p.endDate)}
+                    </p>
+                    {p.note && <p className="text-xs text-gray-400">{p.note}</p>}
+                    {p.status === "PAID" && p.paidAt && (
+                      <p className="text-xs text-green-600">Pago em {formatDate(p.paidAt)}</p>
                     )}
-                    <button
-                      onClick={() => handleDelete(p.id)}
-                      className="text-xs text-red-400 hover:text-red-600 px-2 py-1"
-                    >
-                      Excluir
-                    </button>
                   </div>
+                  <p className="font-bold text-gray-800 text-lg whitespace-nowrap">{formatCurrency(p.totalAmount)}</p>
+                </div>
+                <div className="flex gap-2">
+                  {p.status === "PENDING" && (
+                    <button
+                      onClick={() => handleMarkPaid(p.id)}
+                      className="text-xs bg-green-600 text-white px-3 py-1.5 rounded-lg hover:bg-green-700"
+                    >
+                      Marcar como Pago
+                    </button>
+                  )}
+                  <button
+                    onClick={() => handleDelete(p.id)}
+                    className="text-xs text-red-400 hover:text-red-600 px-2 py-1.5"
+                  >
+                    Excluir
+                  </button>
                 </div>
               </div>
             ))}
